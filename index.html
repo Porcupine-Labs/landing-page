@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="Porcupine Labs">
 <meta property="og:title" content="Porcupine Labs">
 <meta property="og:url" content="https://porcupinelabs.org/">
-<meta property="og:description" content="Measuring biology where it is happening. An independent nonprofit in formation, working at the boundary where AI systems direct physical laboratory hardware.">
+<meta property="og:description" content="Independent measurement where AI directs laboratory hardware. An independent nonprofit in formation, working at the boundary where AI systems direct physical laboratory instruments.">
 <meta property="og:image" content="https://porcupinelabs.org/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,9 +20,10 @@
 {"@context":"https://schema.org","@type":"NGO","name":"Porcupine Labs",
 "url":"https://porcupinelabs.org/","logo":"https://porcupinelabs.org/favicon.svg",
 "email":"john@porcupinelabs.org",
-"slogan":"Measuring biology where it is happening.",
-"description":"Independent nonprofit in formation. Works at the boundary where AI systems direct physical laboratory hardware, evaluating properties of execution and the records facilities keep of it.",
+"slogan":"Independent measurement where AI directs laboratory hardware.",
+"description":"Independent nonprofit in formation. Measures whether safety constraints hold where AI systems direct physical laboratory hardware, and whether a facility's records establish afterward what was done.",
 "address":{"@type":"PostalAddress","addressRegion":"CA","addressCountry":"US"},
+"founder":[{"@type":"Person","name":"John D. Tran"},{"@type":"Person","name":"Patrick M. Shih"}],
 "knowsAbout":["biosecurity","laboratory automation","AI safety","provenance","reconstructability"]}
 </script>
 <title>Porcupine Labs</title>
@@ -33,11 +34,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: one 820px column, label left and body right, hairline rules between.
-   Brand palette only. Quill orange appears once, in the I. */
+   Brand palette only. The quill is a stroke: figures are built from top rules and
+   round-capped lines. Quill orange marks where Porcupine works, once per figure. */
 :root{
   --bg:#F3F0E8; --ink:#12302E; --muted:#3D5E5A; --subtle:#6F8783;
   --rule:#D9D2C0; --rule-strong:#12302E; --quill:#C4622D;
-  --mark:#12302E; --mark-lt:#4E7A75;
+  --mark:#12302E; --mark-lt:#265A55;
   --display:"Space Grotesk",system-ui,sans-serif;
   --body:"IBM Plex Sans",system-ui,-apple-system,"Helvetica Neue",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -60,7 +62,7 @@ header{text-align:center;padding-bottom:52px;border-bottom:1px solid var(--rule-
   clip-path:inset(50%);white-space:nowrap}
 .labs{font-family:var(--mono);font-weight:600;font-size:clamp(12px,2.1vw,15px);
   letter-spacing:.44em;color:var(--muted);margin-top:11px;text-indent:.44em}
-.lead{max-width:24ch;margin:38px auto 0;font-family:var(--display);font-weight:500;
+.lead{max-width:26ch;margin:38px auto 0;font-family:var(--display);font-weight:500;
   font-size:clamp(21px,3.4vw,30px);line-height:1.26;letter-spacing:-.015em;
   color:var(--ink);text-wrap:balance}
 
@@ -72,6 +74,33 @@ h2{font-family:var(--display);font-size:15.5px;font-weight:700;letter-spacing:.0
 .body p{color:var(--muted);margin-bottom:16px;max-width:64ch}
 .body p:last-child{margin-bottom:0}
 .body em{font-style:normal;color:var(--ink);font-weight:500}
+.body a,.fig a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--quill)}
+.tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--subtle);display:block}
+
+/* ---- figures: span both columns ---- */
+.fig{grid-column:1/-1}
+.cap{margin-top:18px;color:var(--muted);font-size:14.5px;max-width:70ch}
+
+/* the stack: five stages, each under a top rule */
+.stack{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.stack li{border-top:3px solid var(--mark);padding-top:14px}
+.stack li.q{border-top:6px solid var(--quill);padding-top:11px}
+.stack b{display:block;font-family:var(--display);font-weight:700;font-size:16px;
+  line-height:1.25;margin:8px 0 6px;color:var(--ink)}
+.stack span.d{display:block;color:var(--muted);font-size:14px;line-height:1.45}
+
+/* rows: questions, rungs, record, people */
+.rows{list-style:none}
+.rows li{display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px;
+  padding:14px 0;border-top:1px solid var(--rule)}
+.rows li:last-child{padding-bottom:0}
+.rows b{display:block;font-weight:500;color:var(--ink)}
+.rows .d{display:block;color:var(--muted);font-size:15.5px}
+.rows .tag{padding-top:5px}
+
+/* all-of-k strip */
+.strip{display:block;width:100%;max-width:400px;height:auto;margin-top:22px}
 
 /* ---- footer ---- */
 footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
@@ -86,6 +115,10 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
   .container{padding-block:40px 64px}
   header{padding-bottom:38px}
   section,footer{grid-template-columns:1fr;gap:14px;padding-block:34px}
+  .stack{grid-template-columns:1fr;gap:0}
+  .stack li,.stack li.q{border-top:0;border-left:3px solid var(--mark);padding:10px 0 14px 16px}
+  .stack li.q{border-left:6px solid var(--quill);padding-left:13px}
+  .rows li{grid-template-columns:1fr;gap:4px}
 }
 :focus-visible{outline:2px solid var(--quill);outline-offset:3px}
 </style>
@@ -113,7 +146,7 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
     <svg class="wordmark" viewBox="0 0 519.2 82.5" role="img" aria-label="Porcupine"><title>Porcupine</title><g transform="translate(0 80.5)"><g transform="translate(0.000 0) scale(0.100000 -0.100000)"><path fill="#12302E" d="M66 0V700H354Q420 700 470.5 673.5Q521 647 549.5 599.0Q578 551 578 485V471Q578 406 548.5 357.5Q519 309 468.5 282.5Q418 256 354 256H198V0ZM198 376H341Q388 376 417.0 402.0Q446 428 446 473V483Q446 528 417.0 554.0Q388 580 341 580H198Z"/></g><g transform="translate(58.800 0) scale(0.100000 -0.100000)"><path fill="#12302E" d="M338 -14Q206 -14 128.0 58.5Q50 131 50 266V434Q50 569 128.0 641.5Q206 714 338 714Q470 714 548.0 641.5Q626 569 626 434V266Q626 131 548.0 58.5Q470 -14 338 -14ZM338 104Q412 104 453.0 147.0Q494 190 494 262V438Q494 510 453.0 553.0Q412 596 338 596Q265 596 223.5 553.0Q182 510 182 438V262Q182 190 223.5 147.0Q265 104 338 104Z"/></g><g transform="translate(124.800 0) scale(0.100000 -0.100000)"><path fill="#12302E" d="M66 0V700H370Q436 700 485.0 677.0Q534 654 561.0 612.0Q588 570 588 513V501Q588 438 558.0 399.0Q528 360 484 342V324Q524 322 546.0 296.5Q568 271 568 229V0H436V210Q436 234 423.5 249.0Q411 264 382 264H198V0ZM198 384H356Q403 384 429.5 409.5Q456 435 456 477V487Q456 529 430.0 554.5Q404 580 356 580H198Z"/></g><g transform="translate(186.400 0) scale(0.100000 -0.100000)"><path fill="#12302E" d="M332 -14Q202 -14 126.0 58.5Q50 131 50 266V434Q50 569 126.0 641.5Q202 714 332 714Q461 714 531.5 643.5Q602 573 602 450V444H472V454Q472 516 437.5 556.0Q403 596 332 596Q262 596 222.0 553.0Q182 510 182 436V264Q182 191 222.0 147.5Q262 104 332 104Q403 104 437.5 144.5Q472 185 472 246V264H602V250Q602 127 531.5 56.5Q461 -14 332 -14Z"/></g><g transform="translate(249.200 0) scale(0.100000 -0.100000)"><path fill="#12302E" d="M336 -14Q250 -14 188.5 17.5Q127 49 94.5 107.5Q62 166 62 246V700H194V242Q194 178 230.5 141.0Q267 104 336 104Q405 104 441.5 141.0Q478 178 478 242V700H610V246Q610 166 577.5 107.5Q545 49 483.5 17.5Q422 -14 336 -14Z"/></g><g transform="translate(314.800 0) scale(0.100000 -0.100000)"><path fill="#12302E" d="M66 0V700H354Q420 700 470.5 673.5Q521 647 549.5 599.0Q578 551 578 485V471Q578 406 548.5 357.5Q519 309 468.5 282.5Q418 256 354 256H198V0ZM198 376H341Q388 376 417.0 402.0Q446 428 446 473V483Q446 528 417.0 554.0Q388 580 341 580H198Z"/></g><path fill="#C4622D" d="M380.20 0 L380.20 -71.90 Q380.20 -78.50 386.80 -78.50 Q393.40 -78.50 393.40 -71.90 L393.40 0 Z"/><g transform="translate(398.400 0) scale(0.100000 -0.100000)"><path fill="#12302E" d="M66 0V700H317L456 90H474V700H604V0H353L214 610H196V0Z"/></g><g transform="translate(463.800 0) scale(0.100000 -0.100000)"><path fill="#12302E" d="M66 0V700H516V580H198V413H488V293H198V120H522V0Z"/></g></g></svg>
     <h1 class="sr-only">Porcupine Labs</h1>
     <div class="labs">LABS</div>
-    <p class="lead">Measuring biology where it is happening.</p>
+    <p class="lead">Independent measurement where AI directs laboratory hardware.</p>
   </header>
 
   <main>
@@ -121,55 +154,111 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
       <h2>About the Lab</h2>
       <div class="body">
         <p>Porcupine Labs is an independent nonprofit in formation, based in the San Francisco
-          Bay Area and selected into the Catalyze Impact biosecurity accelerator in 2026.
-          We work at the boundary where AI systems direct physical laboratory hardware.</p>
+          Bay Area. We measure whether safety constraints hold at the point where AI systems
+          direct physical laboratory hardware, and whether the records a facility keeps are
+          enough to establish afterward what was done.</p>
+        <p>Porcupine was selected into the Catalyze Impact biosecurity accelerator in 2026.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>The Gap</h2>
+      <div class="body">
         <p>Laboratory automation is decades old and installed at scale. What changed is who
           writes the script. Synthesis screening, cryptographic provenance and model
           evaluation each work at the point where they sit: acquisition, the digital artifact,
           the instruction. The instrument itself is unchecked, and the record it leaves does
           not distinguish a protocol a person wrote from one a model wrote.</p>
       </div>
-    </section>
-
-    <section>
-      <h2>Research Approach</h2>
-      <div class="body">
-        <p>We evaluate <em>properties of execution</em> rather than properties of models. That
-          means testing how agentic planners, laboratory execution software and robotic
-          instrumentation behave under ambiguous or adversarial instructions, and asking
-          whether a facility's own records are enough to establish afterward what was done.</p>
-        <p>Our first study is read-only. For a completed run chosen after the fact, we ask how
-          much of it a facility can reconstruct from the systems it already runs: the
-          electronic lab notebook, the inventory and sample management system, instrument
-          logs, the scheduler. Those systems were built to operate a laboratory and to satisfy
-          audit, and the open question is whether what they capture is sufficient to establish
-          what an agent-directed run did, down to which software version and which
-          configuration stood behind each decision. What we find turns into technical
-          specification work on log integrity, provenance, and capability-scoped
-          authorization.</p>
+      <div class="fig">
+        <ol class="stack" aria-label="Where each control sits, from order to bench">
+          <li><span class="tag">01 Order</span><b>Synthesis screening</b><span class="d">Verifies sequence intent.</span></li>
+          <li><span class="tag">02 Instruction</span><b>Model refusal</b><span class="d">Tests text and code outputs.</span></li>
+          <li><span class="tag">03 Protocol</span><b>Biosafety review</b><span class="d">Approves the written protocol.</span></li>
+          <li class="q"><span class="tag">04 Execution</span><b>Porcupine</b><span class="d">Measures what happens here.</span></li>
+          <li><span class="tag">05 The bench</span><b>Material moves</b><span class="d">The physical event itself.</span></li>
+        </ol>
+        <p class="cap">A mistake and an intent produce the same physical event at the bench,
+          so a control that reads intent does not reach this layer.</p>
       </div>
     </section>
 
     <section>
-      <h2>Mission</h2>
+      <h2>Why Now</h2>
       <div class="body">
-        <p>Biology has gone digital. Models now work directly on sequence and structure,
-          predicting how a protein folds and proposing designs that hold up at the bench, and
-          capability in that half of the field is improving faster than any tool that came
-          before it. Drug discovery is where the gains are most visible. Learned models are
-          designing antibodies, de novo binders and small-molecule candidates that have
-          reached clinical trials, and each generation of model has arrived stronger than the
-          one before it.</p>
-        <p>The physical half is moving as well. Robotics, computer vision and machine vision
-          are making the handling, imaging and judgment steps of an experiment cheaper and
-          more repeatable each year, which turns work that once depended on a particular pair
-          of hands into work a facility can run at volume.</p>
-        <p>Those two curves are now improving together, and biology is acquiring a scaling
-          effect of a kind the field has not seen. Every one of those advances arrives at the
-          same place: an instrument that moves material. Porcupine works there. We build the
-          evaluation methods and the authorization standard that existing biosecurity
-          frameworks call for but do not specify, so the record of a physical experiment
-          stays intelligible to a person as the number of experiments grows.</p>
+        <p>Models now work directly on sequence and structure, and robotics is making the
+          handling and imaging steps of an experiment cheaper and more repeatable each year.
+          Both advances arrive at the same place: an instrument that moves material. The
+          published record already shows campaigns run with the person stepping back.</p>
+        <ul class="rows">
+          <li><span class="tag">2025</span><div><b><a href="https://doi.org/10.1038/s41467-025-61209-y">Singh et al., Nature Communications</a></b>
+            <span class="d">A platform combining machine learning, large language models and biofoundry automation engineered two enzymes in four rounds over four weeks.</span></div></li>
+          <li><span class="tag">2024</span><div><b><a href="https://doi.org/10.1038/s44286-023-00002-4">Rapp et al., Nature Chemical Engineering</a></b>
+            <span class="d">Self-driving laboratories ran fully autonomous design-test-learn cycles to engineer more thermostable enzymes.</span></div></li>
+          <li><span class="tag">2026</span><div><b><a href="https://www.biorxiv.org/content/10.64898/2026.02.05.703998v1">Smith et al., bioRxiv</a></b>
+            <span class="d">A frontier language model directed a cell-free protein synthesis campaign on a commercial cloud laboratory, with people preparing and loading reagents.</span></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>What We Measure</h2>
+      <div class="body">
+        <p>We evaluate <em>properties of execution</em> rather than properties of models: how
+          agentic planners, laboratory execution software and robotic instrumentation behave
+          together once a protocol is pushed to hardware.</p>
+        <ul class="rows">
+          <li><span class="tag">01</span><div><b>Does the rule still hold?</b>
+            <span class="d">Whether a safety constraint stated upstream still binds when an instrument moves material.</span></div></li>
+          <li><span class="tag">02</span><div><b>Is safe work getting blocked?</b>
+            <span class="d">Scientists lose time when models deny safe, benign experimental requests. We report over-blocking alongside detection, always as a pair.</span></div></li>
+          <li><span class="tag">03</span><div><b>Can the run be reconstructed?</b>
+            <span class="d">Whether a facility's own records establish what was done, and who or what decided each step.</span></div></li>
+        </ul>
+        <svg class="strip" viewBox="0 0 624 90" role="img" aria-label="Eighteen runs drawn as strokes: seventeen within the constraint and one outside it"><line x1="12" y1="12" x2="12" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="46" y1="12" x2="46" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="80" y1="12" x2="80" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="114" y1="12" x2="114" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="148" y1="12" x2="148" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="182" y1="12" x2="182" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="216" y1="12" x2="216" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="250" y1="12" x2="250" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="284" y1="12" x2="284" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="318" y1="12" x2="318" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="352" y1="12" x2="352" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="386" y1="12" x2="386" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="420" y1="12" x2="420" y2="78" stroke="var(--quill)" stroke-width="14" stroke-linecap="round"/><line x1="454" y1="12" x2="454" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="488" y1="12" x2="488" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="522" y1="12" x2="522" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="556" y1="12" x2="556" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/><line x1="590" y1="12" x2="590" y2="78" stroke="var(--mark)" stroke-width="14" stroke-linecap="round"/></svg>
+        <p class="cap">Safety is not an average. Seventeen runs within a constraint and one
+          outside it is a failure.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reconstructability</h2>
+      <div class="body">
+        <p>Science has always required reproducibility: whether another scientist can get the
+          same result. Reconstructability asks whether anyone can establish what was actually
+          done, and who or what decided each step. The laboratory notebook carried that
+          implicitly, because a person wrote it and that person could be asked.</p>
+        <ul class="rows">
+          <li><span class="tag">Rung 1</span><div><b>The operator, from their own records</b></div></li>
+          <li><span class="tag">Rung 2</span><div><b>An independent third party, from records the operator supplies</b></div></li>
+          <li><span class="tag">Rung 3</span><div><b>A future scientist with no relationship to the lab, from the published record</b></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Independence</h2>
+      <div class="body">
+        <p>Porcupine sells nothing to any laboratory. Findings go to the participating
+          facility first, and publication is anonymized unless the facility decides
+          otherwise.</p>
+        <p>Null results are published on the same timeline as positive ones, and the
+          conditions under which we would stop are written before the first site. What we find
+          turns into an open specification, published free.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>People</h2>
+      <div class="body">
+        <ul class="rows">
+          <li><span class="tag">Co-founder</span><div><b>John D. Tran, PhD</b>
+            <span class="d">PhD in molecular biology, spent at the bench running the protocols these systems now automate. Former Chief Business Officer of a modular laboratory automation company. Reviewer for NSF, DOE and ARPA-E.</span></div></li>
+          <li><span class="tag">Co-founder</span><div><b>Patrick M. Shih, PhD</b>
+            <span class="d">Associate Professor of Plant and Microbial Biology, UC Berkeley. Director, Plant Biosystems Design Program, Joint BioEnergy Institute. Faculty Scientist, Lawrence Berkeley National Laboratory.</span></div></li>
+          <li><span class="tag">Advisor</span><div><b>Thom Norman</b>
+            <span class="d">Through the Catalyze Impact biosecurity accelerator.</span></div></li>
+        </ul>
       </div>
     </section>
   </main>
@@ -179,8 +268,13 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
     <div>
       <a class="addr" href="mailto:john@porcupinelabs.org">john [@] porcupinelabs [.] org</a>
       <p class="fnote">We are looking for facility operators willing to host a read-only
-        provenance exercise, and for reviewers on the first version of the authorization
-        standard.</p>
+        exercise on completed runs, and for reviewers on the first version of the
+        specification.</p>
+      <p class="fnote">We would also like to hear from makers of automated and specialized
+        laboratory instruments, laboratory robotics companies, developers of AI models for
+        biology, and teams building automation software for biology. If you want to
+        collaborate, or to explore a role at Porcupine Labs, please email John at the address
+        above.</p>
     </div>
   </footer>
 </div>
