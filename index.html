@@ -99,6 +99,9 @@ h2{font-family:var(--display);font-size:15.5px;font-weight:700;letter-spacing:.0
 .rows .d{display:block;color:var(--muted);font-size:15.5px}
 .rows .tag{padding-top:5px}
 
+.sub{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink);margin:30px 0 10px}
+
 /* all-of-k strip */
 .strip{display:block;width:100%;max-width:400px;height:auto;margin-top:22px}
 
@@ -190,14 +193,34 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
           handling and imaging steps of an experiment cheaper and more repeatable each year.
           Both advances arrive at the same place: an instrument that moves material. The
           published record already shows campaigns run with the person stepping back.</p>
+        <h3 class="sub">Models directing laboratory work</h3>
         <ul class="rows">
-          <li><span class="tag">2025</span><div><b><a href="https://doi.org/10.1038/s41467-025-61209-y">Singh et al., Nature Communications</a></b>
-            <span class="d">A platform combining machine learning, large language models and biofoundry automation engineered two enzymes in four rounds over four weeks.</span></div></li>
+          <li><span class="tag">2023</span><div><b><a href="https://doi.org/10.1038/s41586-023-06792-0">Boiko et al., Nature</a></b>
+            <span class="d">A system driven by a general-purpose language model designed, planned and performed chemistry experiments, including through a cloud laboratory's programming interface.</span></div></li>
           <li><span class="tag">2024</span><div><b><a href="https://doi.org/10.1038/s44286-023-00002-4">Rapp et al., Nature Chemical Engineering</a></b>
             <span class="d">Self-driving laboratories ran fully autonomous design-test-learn cycles to engineer more thermostable enzymes.</span></div></li>
+          <li><span class="tag">2025</span><div><b><a href="https://doi.org/10.1038/s41467-025-61209-y">Singh et al., Nature Communications</a></b>
+            <span class="d">A platform combining machine learning, large language models and biofoundry automation engineered two enzymes in four rounds over four weeks.</span></div></li>
+          <li><span class="tag">2025</span><div><b><a href="https://openai.com/index/accelerating-biological-research-in-the-wet-lab/">OpenAI and Red Queen Bio, research report</a></b>
+            <span class="d">A frontier model revised a molecular cloning protocol over several rounds. Scientists carried out each revision and uploaded the results.</span></div></li>
           <li><span class="tag">2026</span><div><b><a href="https://www.biorxiv.org/content/10.64898/2026.02.05.703998v1">Smith et al., bioRxiv</a></b>
-            <span class="d">A frontier language model directed a cell-free protein synthesis campaign on a commercial cloud laboratory, with people preparing and loading reagents.</span></div></li>
+            <span class="d">A frontier language model designed more than 29,000 cell-free protein synthesis reactions, run on a commercial cloud laboratory over six months. People were largely limited to preparing and loading reagents.</span></div></li>
+          <li><span class="tag">2026</span><div><b><a href="https://arxiv.org/abs/2610.24806">Cutts et al., arXiv</a></b>
+            <span class="d">Agent pipelines designed protein-binding aptamers across three design-test-improve cycles and diagnosed a specificity failure from the laboratory data between rounds. Researchers ran the wet-lab steps.</span></div></li>
         </ul>
+        <h3 class="sub">Failures and safeguards at the execution layer</h3>
+        <ul class="rows">
+          <li><span class="tag">2025</span><div><b><a href="https://arxiv.org/abs/2501.10385">Mandal et al., arXiv</a></b>
+            <span class="d">Language-model agents operating an atomic force microscope sometimes took actions beyond their instructions, which the authors call sleepwalking.</span></div></li>
+          <li><span class="tag">2026</span><div><b><a href="https://arxiv.org/abs/2606.27231">Wang et al., arXiv</a></b>
+            <span class="d">On a trapped-ion experiment, no agent-written call reaches the hardware without an authorization token. The authors red-teamed their own gate and published the gaps that remained.</span></div></li>
+          <li><span class="tag">2026</span><div><b><a href="https://arxiv.org/abs/2606.31045">Yang et al., arXiv</a></b>
+            <span class="d">Written laboratory rules compiled into runtime monitors at the robot controller. In simulation, unsafe events fell from 39.5% to 23.8%.</span></div></li>
+          <li><span class="tag">2026</span><div><b><a href="https://arxiv.org/abs/2610.32755">Delley et al., arXiv</a></b>
+            <span class="d">A digital twin of a liquid-handling workcell that validates each command block before dispatch and keeps a synchronized record of state, logs and video. Demonstrated with dyes and water.</span></div></li>
+        </ul>
+        <p class="cap">In each of these four, the check was designed and evaluated by the team
+          that built the system.</p>
       </div>
     </section>
 
@@ -253,7 +276,7 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
       <div class="body">
         <ul class="rows">
           <li><span class="tag">Co-founder</span><div><b>John D. Tran, PhD</b>
-            <span class="d">PhD in molecular biology, spent at the bench running the protocols these systems now automate. Former Chief Business Officer of a modular laboratory automation company. Reviewer for NSF, DOE and ARPA-E.</span></div></li>
+            <span class="d">PhD in molecular biology, spent at the bench running the protocols these systems now automate. Spent most of his career as a venture investor at a university research foundation. Former Chief Business Officer of a modular laboratory automation company, and former Chief Operating Officer of a nonprofit startup ecosystem organization focused on capacity building. Reviewer for NSF, DOE and ARPA-E.</span></div></li>
           <li><span class="tag">Co-founder</span><div><b>Patrick M. Shih, PhD</b>
             <span class="d">Associate Professor of Plant and Microbial Biology, UC Berkeley. Director, Plant Biosystems Design Program, Joint BioEnergy Institute. Faculty Scientist, Lawrence Berkeley National Laboratory.</span></div></li>
           <li><span class="tag">Advisor</span><div><b>Thom Norman</b>
