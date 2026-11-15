@@ -1,0 +1,6 @@
+# Porcupine Labs. This site is public and meant to be read, indexed,
+# summarized and forwarded. All crawlers welcome.
+User-agent: *
+Allow: /
+
+Sitemap: https://porcupinelabs.org/sitemap.xml
