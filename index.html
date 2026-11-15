@@ -1,112 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Porcupine Labs | Autonomous Laboratory Safety &amp; Risk Strategy</title>
+  <meta name="description" content="Porcupine Labs conducts execution-layer safety evaluation and physical-layer risk strategy for autonomous laboratory ecosystems.">
+  
+  <link rel="icon" type="image/png" href="logo.png?v=2">
+  <link rel="apple-touch-icon" href="logo.png?v=2">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porcupine Labs</title>
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #0f172a;
-            --muted: #64748b;
-            --border: #e2e8f0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 5rem 2rem;
-            line-height: 1.65;
-        }
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
-        }
-        header {
-            text-align: center;
-            border-bottom: 2px solid var(--text);
-            padding-bottom: 3rem;
-            margin-bottom: 3.5rem;
-        }
-        .logo {
-            width: 100%;
-            max-width: 680px;
-            height: auto;
-            margin: 0 auto 2.5rem auto;
-            display: block;
-        }
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin: 0 0 0.75rem 0;
-        }
-        .tagline {
-            font-size: 1.25rem;
-            color: var(--muted);
-            font-weight: 400;
-            max-width: 650px;
-            margin: 0 auto;
-        }
-        section {
-            margin-bottom: 3.25rem;
-        }
-        h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.1rem;
-        }
-        p {
-            margin: 0 0 1rem 0;
-            font-size: 1.05rem;
-        }
-        .contact {
-            margin-top: 5rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            font-size: 0.95rem;
-            color: var(--muted);
-            text-align: center;
-        }
-        a {
-            color: var(--text);
-            text-decoration: underline;
-        }
-    </style>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --ink: #111111;
+      --muted: #4a4a4a;
+      --subtle: #737373;
+      --rule: #dcdcdc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: "Helvetica Neue", Helvetica, Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 24px;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 72px 0 96px;
+    }
+
+    header {
+      text-align: center;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+    }
+
+    .kicker {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 19px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+    }
+
+    section {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 32px;
+      padding: 44px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .section-index {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: var(--subtle);
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .section-body p {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .section-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      padding-top: 40px;
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 32px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .footer-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--subtle);
+    }
+
+    .footer-details {
+      color: var(--ink);
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        padding: 48px 0 64px;
+      }
+
+      .logo-wrap img {
+        max-width: 250px;
+      }
+
+      section,
+      footer {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.png" alt="Porcupine Labs Logo" class="logo">
-            <h1>Porcupine Labs</h1>
-            <div class="tagline">Execution-layer red teaming and physical-layer risk strategy for autonomous laboratory ecosystems.</div>
-        </header>
-        
-        <main>
-            <section>
-                <h2>About the Lab</h2>
-                <p>Based in the Bay Area and originating from Catalyze Impact, Porcupine Labs is an independent research organization dedicated to the governance and safety of automated scientific infrastructure.</p>
-            </section>
+  <div class="container">
+    <header>
+      <div class="logo-wrap">
+        <img src="logo.png" alt="Porcupine Labs">
+      </div>
+      <div class="kicker">San Francisco Bay Area &middot; Independent Nonprofit Research</div>
+      <p class="lead">
+        Execution-layer safety evaluation and physical-layer risk strategy for autonomous laboratory ecosystems.
+      </p>
+    </header>
 
-            <section>
-                <h2>Research Approach</h2>
-                <p>As artificial intelligence systems increasingly direct physical laboratory hardware, traditional safeguards that evaluate upstream text or intent cannot verify the moment an instrument moves material. Operating independently of model-layer benchmarks, we develop stateful verification methodologies and reconstructability frameworks to empirically evaluate execution-layer behavior.</p>
-            </section>
-
-            <section>
-                <h2>Mission</h2>
-                <p>Our mission is to close the last-mile governance gap between AI agents and physical laboratory hardware by building open specifications, transparent standards, and independent evidence for safe autonomous science.</p>
-            </section>
-        </main>
-
-        <div class="contact">
-            Inquiries: <a href="mailto:john@porcupinelabs.org">john [@] porcupinelabs [.] org</a>
+    <main>
+      <section id="about">
+        <div class="section-meta">
+          <span class="section-index">01</span>
+          <h2>About the Lab</h2>
         </div>
-    </div>
+        <div class="section-body">
+          <p>
+            Porcupine Labs is an independent nonprofit research organization based in the San Francisco Bay Area. Originating from Catalyze Impact, the lab addresses emerging biosecurity and operational safety challenges at the boundary where frontier AI systems direct physical wet-lab hardware.
+          </p>
+          <p>
+            As cloud laboratories, robotic liquid handlers, and automated synthesis platforms scale, digital model evaluations alone can no longer capture real-world risk. We work directly with platform operators, researchers, and policymakers to identify and close physical-layer vulnerabilities before deployment.
+          </p>
+        </div>
+      </section>
+
+      <section id="approach">
+        <div class="section-meta">
+          <span class="section-index">02</span>
+          <h2>Research Approach</h2>
+        </div>
+        <div class="section-body">
+          <p>
+            Our work centers on empirical, execution-layer evaluation across automated experimental workflows. Rather than evaluating biological risk solely through text benchmarks, we test how agentic planners, laboratory execution software, and robotic instrumentation behave under adversarial or ambiguous instructions.
+          </p>
+          <p>
+            We translate these empirical findings into concrete technical safeguards, including hardware-level telemetry verification, protocol anomaly detection, and auditable provenance standards for automated wet-lab infrastructure.
+          </p>
+        </div>
+      </section>
+
+      <section id="mission">
+        <div class="section-meta">
+          <span class="section-index">03</span>
+          <h2>Mission</h2>
+        </div>
+        <div class="section-body">
+          <p>
+            Our mission is to ensure that autonomous biological research infrastructure develops with verifiable physical-layer safeguards. By building rigorous evaluation frameworks and actionable defense strategies, we aim to enable safe scientific acceleration without expanding biological risk.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-label">Contact</div>
+      <div class="footer-details">
+        Inquiries: john [at] porcupinelabs [dot] org
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
