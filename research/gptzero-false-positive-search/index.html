@@ -127,7 +127,7 @@ td{color:var(--muted)}
     <section>
       <h2>Summary</h2>
       <p>Our first paper found no false positives from GPTZero 5.0 on pre-2021 wet-lab methods prose. Methods sections are formulaic, but they are also dense with specific detail, so that result might not extend to writing that reads more like model output. Here we searched deliberately for false positives in three genres chosen for that resemblance: NIH and NSF grant abstracts, whose stock phrasing ("The overall goal of this proposal is...") is a familiar register of model output, and Wikipedia articles, which are polished, explanatory and heavily represented in model training data. All texts were written in 2019 or earlier.</p>
-      <p>Across 685 API calls covering 616 distinct passages from 492 documents, GPTZero 5.0 classified every passage as human with high confidence. No passage was classified AI or mixed, and the highest AI probability was 0.0443. The search was built to move its budget toward any genre that produced near-misses (scores of 0.10 or above); none did, so the budget never concentrated.</p>
+      <p>Across 685 API calls covering 616 distinct passages from 492 documents, GPTZero 5.0 classified every passage as human with high confidence. No passage was classified AI or mixed, and the highest AI probability was 0.0443. Scoring effort was weighted toward whichever genre came closest to the bar. None came close.</p>
     </section>
 
     <section>
@@ -136,8 +136,8 @@ td{color:var(--muted)}
         <li><b>Grant abstracts:</b> NIH RePORTER abstracts from fiscal years 2015 to 2019 and NSF award abstracts from 2015 to 2019, retrieved by six topic searches each (laboratory automation, synthetic biology, plant biology, antimicrobial resistance, CRISPR and biosafety for NIH; synthetic biology, plant, automation, biosecurity, education and microbiome for NSF). NSF's mandated closing sentence was excluded so each scored passage is consecutive, unmodified text.</li>
         <li><b>Encyclopedia text:</b> the last revision on or before December 31, 2019 of 28 Wikipedia articles spanning laboratory science and general reference. Four titles were skipped after repeated rate limiting, leaving 24 articles. Each revision has a permanent link, so the exact scored text can be retrieved.</li>
         <li><b>Passages:</b> consecutive whole paragraphs of at least 300 words (abstracts) or 750 words (Wikipedia), matching the length bars of GPTZero Challenges 02 and 01. A screen removed tables and data lists, following Paper 1's finding that its only high score came from spectral data. Up to four passages per document start at different paragraphs, so Wikipedia passages overlap.</li>
-        <li><b>Allocation:</b> an even pilot, then Thompson sampling on each genre's near-miss rate under a Jeffreys Beta(0.5, 0.5) prior. The stopping rule (close the search if no passage reaches 0.50) was written in an internal planning document at 07:58 UTC on November 21, 2026, before scoring began at 08:20 UTC. It was not posted publicly in advance.</li>
-        <li><b>Record keeping:</b> each result was appended to a hash-chained log, in which each record carries the hash of the one before, so a changed or deleted result breaks verification. The full chain of 685 records verifies.</li>
+        <li><b>Stopping rule:</b> the search was to close if no passage reached 0.50. The rule was written in an internal planning document at 07:58 UTC on November 21, 2026, before scoring began at 08:20 UTC. It was not posted publicly in advance.</li>
+        <li><b>Record keeping:</b> every call was logged in a tamper-evident record with its timestamp, the exact text scored and a SHA-256 fingerprint of that text. The record for all 685 calls was verified intact before analysis.</li>
       </ul>
     </section>
 
@@ -164,7 +164,7 @@ td{color:var(--muted)}
       <h2>3. Limitations and Disclosures</h2>
       <ul class="clean">
         <li><b>Sampling:</b> documents came from topic searches, not a random sample, and NIH results for the chosen terms covered fiscal years 2016 to 2019.</li>
-        <li><b>Repeat scoring:</b> 685 calls included 69 repeat texts (one project returned under two search terms, and grant renewals that reuse an abstract word for word). All counts above use the 616 distinct passages; the harness now removes repeats before scoring.</li>
+        <li><b>Repeat scoring:</b> 685 calls included 69 repeat texts (one project returned under two search terms, and grant renewals that reuse an abstract word for word). All counts above use the 616 distinct passages, and repeats are now removed before scoring.</li>
         <li><b>Version:</b> results apply to GPTZero 5.0 as served on November 21, 2026 (API version 2026-11-04-base).</li>
         <li><b>Funding and independence:</b> API credits were provided by GPTZero under its research program. GPTZero had no role in design, analysis or publication. No pathogens, toxins or regulated agents appear in any scored text.</li>
       </ul>
@@ -172,7 +172,7 @@ td{color:var(--muted)}
 
     <section>
       <h2>4. Data</h2>
-      <p>The <a href="/research/gptzero-false-positive-search/manifest.csv">evidence manifest</a> lists every call: source link, source date, word count, SHA-256 of the scored text, classification, probabilities, model version and the record's hash in the chain. The scored text can be retrieved from each source link. The harness code is available on request.</p>
+      <p>The <a href="/research/gptzero-false-positive-search/manifest.csv">evidence manifest</a> lists every call: source link, source date, word count, SHA-256 fingerprint of the scored text, classification, probabilities and model version. The scored text can be retrieved from each source link. Further methods detail is available to reviewers on request.</p>
       <p>This finding is an addendum to <a href="/research/gptzero-wetlab-calibration/">Calibrating GPTZero 5.0 in Wet-Lab Workflows</a>. Porcupine Labs measures how often protective systems act on benign inputs, from text detectors to safeguards in AI-directed laboratories, because a check that blocks valid work carries a cost alongside every hazard it catches.</p>
     </section>
   </main>
