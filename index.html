@@ -81,6 +81,7 @@ h2{font-family:var(--display);font-size:15.5px;font-weight:700;letter-spacing:.0
 /* ---- figures: span both columns ---- */
 .fig{grid-column:1/-1}
 .cap{margin-top:18px;color:var(--muted);font-size:14.5px;max-width:70ch}
+.cap-center{margin-inline:auto;text-align:center}
 
 /* the stack: five stages, each under a top rule */
 .stack{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
@@ -125,7 +126,7 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
 }
 :focus-visible{outline:2px solid var(--quill);outline-offset:3px}
 </style>
-  <link rel="stylesheet" href="/porcupine-labs-research-finding-section-assets/research-finding-section.css">
+<link rel="stylesheet" href="/porcupine-labs-research-finding-section-assets/research-finding-section.css">
 </head>
 <body>
 
@@ -182,7 +183,7 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
           <li class="q"><span class="tag">04 Execution</span><b>Porcupine</b><span class="d">Measures what happens here.</span></li>
           <li><span class="tag">05 The bench</span><b>Material moves</b><span class="d">The physical event itself.</span></li>
         </ol>
-        <p class="cap">A mistake and an intent produce the same physical event at the bench,
+        <p class="cap cap-center">A mistake and an intent produce the same physical event at the bench,
           so a control that reads intent does not reach this layer.</p>
       </div>
     </section>
@@ -285,10 +286,20 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
         </ul>
       </div>
     </section>
-      <section id="research-findings">
+
+    <section id="research-findings">
       <h2>Research Findings</h2>
       <div class="body">
-        <div id="research-finding-mount"></div>
+        <div id="research-finding-mount" data-summary-src="/porcupine-labs-research-finding-section-assets/research-finding-summary.json" data-markdown-src="/porcupine-labs-research-finding-section-assets/research-finding-section.md">
+          <table class="pl-data-table" aria-label="Research findings">
+            <tbody>
+              <tr>
+                <td>Execution &amp; Provenance Artifacts</td>
+                <td><a href="/porcupine-labs-research-finding-section-assets/research-finding-section.md">Finding Markdown</a> · <a href="/porcupine-labs-research-finding-section-assets/research-finding-summary.json">Summary JSON</a> · <a href="/porcupine-labs-research-finding-section-assets/README.md">Asset README</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   </main>
@@ -309,7 +320,6 @@ footer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px;
   </footer>
 </div>
 
-  <script src="/porcupine-labs-research-finding-section-assets/research-finding-section.js"></script>
+<script src="/porcupine-labs-research-finding-section-assets/research-finding-section.js"></script>
 </body>
 </html>
-<!-- paste your HTML lines here -->
