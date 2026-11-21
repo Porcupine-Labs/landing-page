@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F3F0E8">
+<link rel="canonical" href="https://porcupinelabs.org/research/gptzero-false-positive-search/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Porcupine Labs">
+<meta property="og:title" content="A Targeted Search for GPTZero 5.0 False Positives — Porcupine Labs">
+<meta property="og:url" content="https://porcupinelabs.org/research/gptzero-false-positive-search/">
+<meta property="og:description" content="685 GPTZero 5.0 calls on 616 distinct pre-2021 human passages chosen to resemble model output: zero AI or mixed classifications.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>A Targeted Search for GPTZero 5.0 False Positives — Porcupine Labs</title>
+<meta name="description" content="685 GPTZero 5.0 calls on 616 distinct pre-2021 human passages chosen to resemble model output: zero AI or mixed classifications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#F3F0E8; --ink:#12302E; --muted:#3D5E5A; --subtle:#6F8783;
+  --rule:#D9D2C0; --rule-strong:#12302E; --quill:#C4622D;
+  --mark:#12302E; --mark-lt:#265A55;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Helvetica Neue",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--body);
+  font-size:16.5px;line-height:1.68;-webkit-font-smoothing:antialiased;
+  padding-left:max(24px,env(safe-area-inset-left,0px));
+  padding-right:max(24px,env(safe-area-inset-right,0px));
+}
+.container{max-width:820px;margin-inline:auto;padding-block:clamp(44px,7vw,72px) 96px}
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding-bottom:24px;border-bottom:1px solid var(--rule-strong);
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+}
+.topbar a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--quill)}
+.topbar span{color:var(--subtle)}
+.paper-head{padding-block:38px;border-bottom:1px solid var(--rule)}
+.kicker{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--quill);margin-bottom:12px;
+}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(26px,4.2vw,38px);
+  line-height:1.18;letter-spacing:-.02em;color:var(--ink);max-width:28ch;
+}
+.meta{
+  margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 22px;
+  font-size:14.5px;color:var(--muted);
+}
+.meta b{font-weight:500;color:var(--ink)}
+.kpis{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+  margin-top:28px;
+}
+.kpi{border-top:3px solid var(--mark);padding-top:12px}
+.kpi.accent{border-top-color:var(--quill)}
+.kpi .val{
+  font-family:var(--display);font-weight:700;font-size:24px;line-height:1.15;color:var(--ink);
+}
+.kpi .lbl{margin-top:4px;font-size:13.5px;line-height:1.4;color:var(--muted)}
+section{padding-block:36px;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+h2{
+  font-family:var(--display);font-weight:700;font-size:18px;
+  line-height:1.3;color:var(--ink);margin-bottom:14px;
+}
+h3{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--ink);margin:24px 0 10px;
+}
+p{color:var(--muted);margin-bottom:15px;max-width:68ch}
+p:last-child{margin-bottom:0}
+em{font-style:normal;color:var(--ink);font-weight:500}
+a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--quill)}
+ul.clean{list-style:none;display:grid;gap:12px;margin-top:8px}
+ul.clean li{padding-left:16px;border-left:2px solid var(--rule-strong);color:var(--muted);max-width:68ch}
+ul.clean b{color:var(--ink);font-weight:500}
+.table-wrap{overflow-x:auto;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.45}
+th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink);border-bottom:2px solid var(--rule-strong);
+}
+td{color:var(--muted)}
+.num{font-family:var(--mono);font-size:12.5px;color:var(--ink);white-space:nowrap}
+@media (max-width:680px){
+  .kpis{grid-template-columns:1fr}
+  .topbar{flex-direction:column;align-items:flex-start}
+}
+:focus-visible{outline:2px solid var(--quill);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <a href="/research/">← All research</a>
+    <span>Research finding · November 21, 2026</span>
+  </div>
+
+  <header class="paper-head">
+    <div class="kicker">Research Finding · Addendum to Paper 1 · GPTZero Challenge 03</div>
+    <h1>A Targeted Search for GPTZero 5.0 False Positives in Pre-2021 Grant Abstracts and Encyclopedia Text</h1>
+    <div class="meta">
+      <span><b>Author:</b> John D. Tran, Ph.D. (Co-founder &amp; CEO, Porcupine Labs, an independent nonprofit in formation)</span>
+      <span><b>Date:</b> November 21, 2026</span>
+      <span><b>Detector:</b> GPTZero 5.0, API version 2026-11-04-base</span>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="val">0 / 492</div><div class="lbl">Documents with any passage classified AI or mixed (616 distinct passages).</div></div>
+      <div class="kpi accent"><div class="val">0.0443</div><div class="lbl">Highest AI probability observed, on a bounty bar of 0.75.</div></div>
+      <div class="kpi"><div class="val">≤0.39%</div><div class="lbl">95% Bayesian upper bound on the per-document false-positive rate (Jeffreys prior).</div></div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Summary</h2>
+      <p>Our first paper found no false positives from GPTZero 5.0 on pre-2021 wet-lab methods prose. Methods sections are formulaic, but they are also dense with specific detail, so that result might not extend to writing that reads more like model output. Here we searched deliberately for false positives in three genres chosen for that resemblance: NIH and NSF grant abstracts, whose stock phrasing ("The overall goal of this proposal is...") is a familiar register of model output, and Wikipedia articles, which are polished, explanatory and heavily represented in model training data. All texts were written in 2019 or earlier.</p>
+      <p>Across 685 API calls covering 616 distinct passages from 492 documents, GPTZero 5.0 classified every passage as human with high confidence. No passage was classified AI or mixed, and the highest AI probability was 0.0443. The search was built to move its budget toward any genre that produced near-misses (scores of 0.10 or above); none did, so the budget never concentrated.</p>
+    </section>
+
+    <section>
+      <h2>1. Design</h2>
+      <ul class="clean">
+        <li><b>Grant abstracts:</b> NIH RePORTER abstracts from fiscal years 2015 to 2019 and NSF award abstracts from 2015 to 2019, retrieved by six topic searches each (laboratory automation, synthetic biology, plant biology, antimicrobial resistance, CRISPR and biosafety for NIH; synthetic biology, plant, automation, biosecurity, education and microbiome for NSF). NSF's mandated closing sentence was excluded so each scored passage is consecutive, unmodified text.</li>
+        <li><b>Encyclopedia text:</b> the last revision on or before December 31, 2019 of 28 Wikipedia articles spanning laboratory science and general reference. Four titles were skipped after repeated rate limiting, leaving 24 articles. Each revision has a permanent link, so the exact scored text can be retrieved.</li>
+        <li><b>Passages:</b> consecutive whole paragraphs of at least 300 words (abstracts) or 750 words (Wikipedia), matching the length bars of GPTZero Challenges 02 and 01. A screen removed tables and data lists, following Paper 1's finding that its only high score came from spectral data. Up to four passages per document start at different paragraphs, so Wikipedia passages overlap.</li>
+        <li><b>Allocation:</b> an even pilot, then Thompson sampling on each genre's near-miss rate under a Jeffreys Beta(0.5, 0.5) prior. The stopping rule (close the search if no passage reaches 0.50) was written in an internal planning document at 07:58 UTC on November 21, 2026, before scoring began at 08:20 UTC. It was not posted publicly in advance.</li>
+        <li><b>Record keeping:</b> each result was appended to a hash-chained log, in which each record carries the hash of the one before, so a changed or deleted result breaks verification. The full chain of 685 records verifies.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. Results</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Genre</th><th>Documents</th><th>Distinct passages</th><th>Median words</th><th>AI / mixed</th><th>Max P(AI)</th><th>95% upper bound</th></tr></thead>
+        <tbody>
+          <tr><td>NIH abstracts, FY2016 to 2019</td><td class="num">356</td><td class="num">390</td><td class="num">400</td><td class="num">0 / 0</td><td class="num">0.0013</td><td class="num">≤0.54%</td></tr>
+          <tr><td>NSF abstracts, 2015 to 2019</td><td class="num">112</td><td class="num">137</td><td class="num">373</td><td class="num">0 / 0</td><td class="num">0.0050</td><td class="num">≤1.70%</td></tr>
+          <tr><td>Wikipedia, frozen 2019</td><td class="num">24</td><td class="num">89</td><td class="num">789</td><td class="num">0 / 0</td><td class="num">0.0443</td><td class="num">≤7.61%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Upper bounds are per document, from a Jeffreys Beta(0.5, 0.5) posterior on zero events, and are only as tight as each genre's sample. The Wikipedia bound is wide because 24 articles is a small sample, even with 89 passages. Every call returned a high-confidence classification. The median AI probability across all calls was about 0.000001.</p>
+      <h3>What this does and does not show</h3>
+      <ul class="clean">
+        <li><b>It extends Paper 1's specificity result</b> from wet-lab methods prose to grant abstracts and encyclopedia text, genres selected because they resemble model output.</li>
+        <li><b>It is consistent with GPTZero's published claim</b> of a false-positive rate below 1 in 50,000 essay-length texts, and cannot test a rate that low: zero events in 492 documents bounds the rate at about 0.4%.</li>
+        <li><b>It does not cover</b> textbook prose, corporate filings, plain-language medical summaries or non-native English writing, which remain untested here.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Limitations and Disclosures</h2>
+      <ul class="clean">
+        <li><b>Sampling:</b> documents came from topic searches, not a random sample, and NIH results for the chosen terms covered fiscal years 2016 to 2019.</li>
+        <li><b>Repeat scoring:</b> 685 calls included 69 repeat texts (one project returned under two search terms, and grant renewals that reuse an abstract word for word). All counts above use the 616 distinct passages; the harness now removes repeats before scoring.</li>
+        <li><b>Version:</b> results apply to GPTZero 5.0 as served on November 21, 2026 (API version 2026-11-04-base).</li>
+        <li><b>Funding and independence:</b> API credits were provided by GPTZero under its research program. GPTZero had no role in design, analysis or publication. No pathogens, toxins or regulated agents appear in any scored text.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Data</h2>
+      <p>The <a href="/research/gptzero-false-positive-search/manifest.csv">evidence manifest</a> lists every call: source link, source date, word count, SHA-256 of the scored text, classification, probabilities, model version and the record's hash in the chain. The scored text can be retrieved from each source link. The harness code is available on request.</p>
+      <p>This finding is an addendum to <a href="/research/gptzero-wetlab-calibration/">Calibrating GPTZero 5.0 in Wet-Lab Workflows</a>. Porcupine Labs measures how often protective systems act on benign inputs, from text detectors to safeguards in AI-directed laboratories, because a check that blocks valid work carries a cost alongside every hazard it catches.</p>
+    </section>
+  </main>
+</div>
+</body>
+</html>
