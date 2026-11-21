@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F3F0E8">
+<link rel="canonical" href="https://porcupinelabs.org/research">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Porcupine Labs">
+<meta property="og:title" content="First Empirical Validation of Frontier Statistical AI Detection in Wet-Lab Workflows — Porcupine Labs">
+<meta property="og:url" content="https://porcupinelabs.org/research">
+<meta property="og:description" content="Calibrating GPTZero 5.0 across historical wet-lab methods, late-2026 bioRxiv preprints, and parameter-edited protocols (n = 772).">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Research Preprint — Porcupine Labs</title>
+<meta name="description" content="First Empirical Validation of Frontier Statistical AI Detection in Wet-Lab Workflows: Calibrating GPTZero 5.0 Across Historical Methods, 2026 Preprints, and Edited Protocols.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#F3F0E8; --ink:#12302E; --muted:#3D5E5A; --subtle:#6F8783;
+  --rule:#D9D2C0; --rule-strong:#12302E; --quill:#C4622D;
+  --mark:#12302E; --mark-lt:#265A55;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Helvetica Neue",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--body);
+  font-size:16.5px;line-height:1.68;-webkit-font-smoothing:antialiased;
+  padding-left:max(24px,env(safe-area-inset-left,0px));
+  padding-right:max(24px,env(safe-area-inset-right,0px));
+}
+.container{max-width:820px;margin-inline:auto;padding-block:clamp(44px,7vw,72px) 96px}
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding-bottom:24px;border-bottom:1px solid var(--rule-strong);
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+}
+.topbar a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--quill)}
+.topbar span{color:var(--subtle)}
+.paper-head{padding-block:38px;border-bottom:1px solid var(--rule)}
+.kicker{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--quill);margin-bottom:12px;
+}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(26px,4.2vw,38px);
+  line-height:1.18;letter-spacing:-.02em;color:var(--ink);max-width:28ch;
+}
+.meta{
+  margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 22px;
+  font-size:14.5px;color:var(--muted);
+}
+.meta b{font-weight:500;color:var(--ink)}
+.kpis{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+  margin-top:28px;
+}
+.kpi{border-top:3px solid var(--mark);padding-top:12px}
+.kpi.accent{border-top-color:var(--quill)}
+.kpi .val{
+  font-family:var(--display);font-weight:700;font-size:24px;line-height:1.15;color:var(--ink);
+}
+.kpi .lbl{margin-top:4px;font-size:13.5px;line-height:1.4;color:var(--muted)}
+section{padding-block:36px;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+h2{
+  font-family:var(--display);font-weight:700;font-size:18px;
+  line-height:1.3;color:var(--ink);margin-bottom:14px;
+}
+h3{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--ink);margin:24px 0 10px;
+}
+p{color:var(--muted);margin-bottom:15px;max-width:68ch}
+p:last-child{margin-bottom:0}
+em{font-style:normal;color:var(--ink);font-weight:500}
+a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--quill)}
+ul.clean{list-style:none;display:grid;gap:12px;margin-top:8px}
+ul.clean li{padding-left:16px;border-left:2px solid var(--rule-strong);color:var(--muted);max-width:68ch}
+ul.clean b{color:var(--ink);font-weight:500}
+.table-wrap{overflow-x:auto;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.45}
+th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink);border-bottom:2px solid var(--rule-strong);
+}
+td{color:var(--muted)}
+.num{font-family:var(--mono);font-size:12.5px;color:var(--ink);white-space:nowrap}
+@media (max-width:680px){
+  .kpis{grid-template-columns:1fr}
+  .topbar{flex-direction:column;align-items:flex-start}
+}
+:focus-visible{outline:2px solid var(--quill);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <a href="/">← Porcupine Labs</a>
+    <span>Preprint · November 20, 2026</span>
+  </div>
+
+  <header class="paper-head">
+    <div class="kicker">Research Finding · GPTZero Challenge 03</div>
+    <h1>First Empirical Validation of Frontier Statistical AI Detection in Wet-Lab Workflows: Calibrating GPTZero 5.0 Across Historical Methods, 2026 Preprints, and Edited Protocols</h1>
+    <div class="meta">
+      <span><b>Author:</b> John D. Tran, Ph.D. (Founder &amp; CEO, Porcupine Labs, an independent nonprofit in formation)</span>
+      <span><b>Date:</b> November 20, 2026</span>
+      <span><b>Corpus:</b> n = 772 passages</span>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="val">0 / 100</div>
+        <div class="lbl">False positives on pre-2021 human methods (Slice A; 95% Bayesian upper bound 1.90%).</div>
+      </div>
+      <div class="kpi accent">
+        <div class="val">26.39%</div>
+        <div class="lbl">Pure AI in Oct–Nov 2026 bioRxiv preprints (Slice B, n = 72; 40.28% combined non-human).</div>
+      </div>
+      <div class="kpi">
+        <div class="val">0 / 50</div>
+        <div class="lbl">Flags on scalar or physical edits (Slices C1 &amp; C2; TOST equivalent within ±0.01).</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Abstract</h2>
+      <p><em>Background:</em> Frontier statistical AI text detectors achieve near-zero false-positive rates on literary and journalistic prose, yet their calibration on procedural life-science protocols and contemporary preprints remains uncharacterized. Establishing how token-level statistical classifiers behave across historical scientific writing, modern preprints, and edited protocols helps clarify where text screening works and where physical verification is needed in AI-directed laboratories.</p>
+      <p><em>Methods:</em> Using sponsored research credits from GPTZero's November 2026 detection benchmark (Challenge 03), we evaluated GPTZero 5.0 (<code>/v2/predict/text</code>) across 772 life-science passages using a deterministic five-check distribution-free harness (TOST equivalence, ROC-AUC/PR-AUC and Cliff's Delta, confound-adjusted permutation GLM, Bayesian Jeffreys Beta(0.5, 0.5) bounds, and word-level Levenshtein token elasticity): (1) a 500-article pre-2021 PubMed Central (PMC) methods sweep (2015–2020; 575,200 words), (2) a 100-sample pre-2021 human methods baseline (Slice A, 2010–2014), (3) 72 contemporary bioRxiv preprints from October 1 to November 20, 2026 (Slice B), and (4) 100 paired perturbations from Slice A (Slice C1: 50 scalar parameter edits; Slice C2: 50 fabricated 2025/2026 citations and physically impossible bench steps).</p>
+      <p><em>Results:</em> In late-2026 bioRxiv preprints (Slice B), 26.39% (19/72; 95% Bayesian upper bound 35.53%) were classified as pure AI and 13.89% (10/72) as mixed (40.28% combined non-human, 95% Bayesian CI: 29.51%–51.81%; mean AI probability 0.26995 vs. 0.00088 in Slice A; ROC-AUC = 0.7372 [0.6521, 0.8163]; Cliff's Delta = +0.4744; confound-adjusted Raw OLS Beta = +0.320693, <em>p</em><sub>perm</sub> = 9.999e-05). Across Slice A, 0/100 passages triggered AI or mixed flags (95% Bayesian upper bound 1.90%). In Slices C1 (mean 0.9 mutated tokens; paired mean delta -0.000014, TOST <em>p</em><sub>max</sub> = 0 within ±0.01) and C2 (mean 27.9 mutated tokens; paired mean delta +0.001646, TOST <em>p</em><sub>max</sub> = 8.438e-14 within ±0.01), 0/50 edited protocols per slice were flagged as AI or mixed.</p>
+      <p><em>Conclusions:</em> Statistical detection provides a calibrated upstream signal for population-level authoring drift in preprints without penalizing formulaic human methods prose. Because scores remain invariant under scalar and physical edits, linguistic origin and physical validity are orthogonal properties, requiring downstream physical-constraint verification and run-reconstruction provenance at the instrument boundary.</p>
+    </section>
+
+    <section>
+      <h2>1. Core Findings &amp; Statistical Summary</h2>
+      <p>We tested three hypotheses across the corpus: (1) formulaic wet-lab methods prose avoids false positives without domain suppression rules, (2) contemporary preprints show a confound-robust shift relative to pre-LLM baselines, and (3) localized parameter or physical edits do not shift prose-level AI probabilities outside a ±0.01 equivalence band.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cohort</th>
+              <th>n</th>
+              <th>Flagged AI</th>
+              <th>Combined Non-Human</th>
+              <th>Mean / Max P(AI)</th>
+              <th>ROC-AUC [95% CI]</th>
+              <th>Cliff's Delta</th>
+              <th>TOST (±0.01)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Run 1: 2015–2020 PMC Sweep</td>
+              <td class="num">500</td>
+              <td class="num">1 (0.20%)</td>
+              <td class="num">1 (0.20%)</td>
+              <td class="num">— / 0.7144</td>
+              <td class="num">—</td>
+              <td class="num">—</td>
+              <td class="num">—</td>
+            </tr>
+            <tr>
+              <td>Slice A: 2010–2014 Human Methods</td>
+              <td class="num">100</td>
+              <td class="num">0 (0.00%; ≤1.90%)</td>
+              <td class="num">0 (0.00%; 0.00–2.47%)</td>
+              <td class="num">0.00088 / 0.06016</td>
+              <td class="num">Baseline</td>
+              <td class="num">Baseline</td>
+              <td class="num">Baseline</td>
+            </tr>
+            <tr>
+              <td>Slice B: Oct–Nov 2026 bioRxiv</td>
+              <td class="num">72</td>
+              <td class="num">19 (26.39%; ≤35.53%)</td>
+              <td class="num">29 (40.28%; 29.51–51.81%)</td>
+              <td class="num">0.26995 / 1.00000</td>
+              <td class="num">0.7372 [0.6521, 0.8163]</td>
+              <td class="num">+0.4744</td>
+              <td class="num">—</td>
+            </tr>
+            <tr>
+              <td>Slice C1: Scalar Parameter Edits</td>
+              <td class="num">50</td>
+              <td class="num">0 (0.00%; ≤3.75%)</td>
+              <td class="num">0 (0.00%; 0.00–4.83%)</td>
+              <td class="num">0.00158 / 0.06016</td>
+              <td class="num">0.4976 [0.4013, 0.5984]</td>
+              <td class="num">-0.0048</td>
+              <td class="num">p<sub>max</sub> = 0 (True)</td>
+            </tr>
+            <tr>
+              <td>Slice C2: Phantom Citations &amp; Physics</td>
+              <td class="num">50</td>
+              <td class="num">0 (0.00%; ≤3.75%)</td>
+              <td class="num">0 (0.00%; 0.00–4.83%)</td>
+              <td class="num">0.00181 / 0.02941</td>
+              <td class="num">0.6868 [0.5960, 0.7696]</td>
+              <td class="num">+0.3736</td>
+              <td class="num">8.438e-14 (True)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What held and what didn't</h3>
+      <ul class="clean">
+        <li><b>Historical specificity held:</b> Zero of 100 pre-2021 human methods passages in Slice A were flagged as AI or mixed. Across the 500-article PMC sweep (575,200 words), zero narrative prose passages reached 0.75; the lone flagged record (PMC9070424 at 0.7144) consisted of raw NMR and IR spectral tables rather than prose.</li>
+        <li><b>Preprint drift was confound-robust:</b> Slice B showed 26.39% pure AI and 40.28% combined non-human (mean P(AI) = 0.26995, a 307x rise over Slice A), holding after adjusting for word count, type-token ratio, numeric density, and burstiness SD across 10,000 permutations (Raw OLS Beta = +0.320693, <em>p</em><sub>perm</sub> = 9.999e-05).</li>
+        <li><b>Parameter and physical edits stayed invisible to prose scoring:</b> Mutating temperatures (+18.5°C), volumes (4.2x), or durations (3x) in Slice C1 (mean 0.9 mutated tokens) or adding fabricated 2025/2026 citations and physically impossible bench steps (148°C open aqueous buffer, 260,000 x g microcentrifuge spins) in Slice C2 (mean 27.9 mutated tokens) produced 0/50 AI/mixed flags and remained within ±0.01 equivalence bounds.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. Architectural Takeaway for AI-Directed Labs</h2>
+      <p>Token-level statistical detectors evaluate surface text distributions, not physical feasibility, cumulative reagent state, or instrument limits. Upstream text screening is useful for literature triage and tracking macro-level authoring drift, while physical constraints and run reconstructability require dedicated checks at the execution boundary—such as deterministic deck-state tracking, mass-balance and physical-limit checks, and tamper-evident execution records.</p>
+    </section>
+
+    <section>
+      <h2>3. Limitations, Falsifiers &amp; Disclosures</h2>
+      <ul class="clean">
+        <li><b>Authorship vs. editing:</b> Statistical proximity to model output does not by itself separate undisclosed drafting from permitted language editing.</li>
+        <li><b>Scope of edits:</b> Slice C1 tested deterministic scalar edits (mean 0.9 mutated tokens) rather than multi-sentence LLM rewrites, which we plan to study in future work.</li>
+        <li><b>Falsifiers:</b> Specificity fails if readable pre-2021 human methods prose exceeds a 1.0% false-positive rate; drift fails if confound-adjusted regression removes the Slice B vs. Slice A shift; orthogonality fails if text-plus-physics checks catch single-parameter scalar edits at &gt;95% recall with &lt;0.5% false positives.</li>
+        <li><b>Zero-infohazard &amp; disclosures:</b> All texts and perturbations used benign molecular biology and chemistry workflows with zero pathogens, toxins, or regulated agents. Evaluation credits were provided under GPTZero's November 2026 Challenge 03 benchmark; GPTZero had no role in study design, analysis, or publication decisions. Porcupine Labs (an independent nonprofit in formation) maintains a strict no-pay-for-pass firewall.</li>
+      </ul>
+    </section>
+  </main>
+</div>
+</body>
+</html>
