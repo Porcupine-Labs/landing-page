@@ -106,6 +106,10 @@ td{color:var(--muted)}
 .paper-list h2{font-size:21px;margin:8px 0 10px}
 .paper-list h2 a{border-bottom:0}
 .paper-list h2 a:hover{border-bottom:1px solid var(--quill)}
+.paper-list .addendum{margin-top:18px;padding:14px 0 2px 18px;border-left:2px solid var(--quill)}
+.paper-list .addendum h3{font-family:var(--display);font-size:16px;font-weight:700;letter-spacing:0;text-transform:none;margin:6px 0 8px;line-height:1.35}
+.paper-list .addendum h3 a{border-bottom:0}
+.paper-list .addendum h3 a:hover{border-bottom:1px solid var(--quill)}
 </style>
 </head>
 <body>
@@ -123,16 +127,15 @@ td{color:var(--muted)}
   <main>
     <ul class="paper-list">
       <li>
-        <div class="date">Research finding · November 21, 2026</div>
-        <h2><a href="/research/gptzero-false-positive-search/">A Targeted Search for GPTZero 5.0 False Positives in Pre-2021 Grant Abstracts and Encyclopedia Text</a></h2>
-        <p>A deliberate search for GPTZero 5.0 false positives in 616 pre-2021 passages from grant abstracts and Wikipedia, chosen to resemble model output. None was classified AI or mixed.</p>
-        <p><a href="/research/gptzero-false-positive-search/">Read the finding →</a></p>
-      </li>
-      <li>
         <div class="date">Preprint · November 20, 2026</div>
         <h2><a href="/research/gptzero-wetlab-calibration/">Calibrating GPTZero 5.0 in Wet-Lab Workflows: Historical Methods, 2026 Preprints, and Edited Protocols</a></h2>
         <p>Scores 772 life-science passages with GPTZero 5.0: pre-2021 human methods prose, October and November 2026 bioRxiv preprints, and protocols edited with scalar changes or physically impossible steps.</p>
         <p><a href="/research/gptzero-wetlab-calibration/">Read the preprint →</a></p>
+        <div class="addendum">
+          <div class="date">Addendum 1 · November 21, 2026</div>
+          <h3><a href="/research/gptzero-false-positive-search/">A Targeted Search for GPTZero 5.0 False Positives in Pre-2021 Grant Abstracts and Encyclopedia Text</a></h3>
+          <p>Extends the specificity result to 616 pre-2021 passages from grant abstracts and Wikipedia, chosen to resemble model output. None was classified AI or mixed.</p>
+        </div>
       </li>
     </ul>
   </main>
